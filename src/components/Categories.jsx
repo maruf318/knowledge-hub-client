@@ -16,7 +16,7 @@ const Categories = () => {
       <h1 className="text-5xl text-center font-bold my-10">
         8 Book categories here
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {categories.map((category, index) => (
           <div key={index} className="card card-compact bg-base-100 shadow-xl">
             <figure>
