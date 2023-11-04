@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+import "../../src/App.css";
+// import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -28,10 +31,18 @@ const Categories = () => {
                 {category.category_name}
               </h2>
 
-              <div className="card-actions justify-end">
-                <button className="btn btn-secondary capitalize text-white w-full">
-                  Explore
+              <div className="card-actions flex justify-end">
+                <button className="btn btn-secondary capitalize text-primary-content ">
+                  Explore <FiArrowRight></FiArrowRight>
                 </button>
+                {/* <Link to={"/addproduct"}>
+                  <button
+                    style={{ "--clr": "#ff1867" }}
+                    className="buttonBody "
+                  >
+                    <span>Explore</span> <i></i>
+                  </button>
+                </Link> */}
               </div>
             </div>
           </div>
