@@ -1,7 +1,11 @@
 import Banner from "../components/Banner";
 
 const Home = () => {
-  return <Banner></Banner>;
+  return (
+    <div>
+      <Banner></Banner>
+    </div>
+  );
 };
 
 export default Home;

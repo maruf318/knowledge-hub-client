@@ -14,47 +14,49 @@ import { Pagination } from "swiper/modules";
 const Banner = () => {
   return (
     <div>
-      <h1>Banner here</h1>
-      <Swiper
-        slidesPerView={"auto"}
-        spaceBetween={30}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-        </SwiperSlide>
-      </Swiper>
+      {/* <h1>Banner here</h1> */}
+      <div>
+        <Swiper
+          slidesPerView={"auto"}
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            {" "}
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            {" "}
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            {" "}
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
   );
 };
