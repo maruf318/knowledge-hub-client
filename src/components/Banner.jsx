@@ -1,5 +1,14 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import pic1 from "../assets/pic1.jpg";
+import pic2 from "../assets/pic2.jpg";
+import pic3 from "../assets/pic3.jpg";
+import pic4 from "../assets/pic4.jpg";
+import pic5 from "../assets/pic5.jpg";
+import pic6 from "../assets/pic6.jpg";
+import pic7 from "../assets/pic7.jpg";
+import pic8 from "../assets/pic8.jpg";
+import pic9 from "../assets/pic9.jpg";
 
 // Import Swiper styles
 import "swiper/css";
@@ -26,34 +35,34 @@ const Banner = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic7} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            {" "}
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic2} alt="" />
           </SwiperSlide>
           <SwiperSlide>
             {" "}
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic3} alt="" />
           </SwiperSlide>
           <SwiperSlide>
             {" "}
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic4} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            {" "}
+            <img src={pic5} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic6} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic1} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="https://i.imgur.com/umVUfRm.jpg" alt="" />
+            <img src={pic8} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={pic9} alt="" />
           </SwiperSlide>
         </Swiper>
       </div>
