@@ -35,34 +35,31 @@ const Banner = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={pic7} alt="" />
+            <img src={pic7} alt="book-Picture-Library1" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={pic2} alt="" />
+            <img src={pic2} alt="book-Picture-Library2" />
           </SwiperSlide>
           <SwiperSlide>
-            {" "}
-            <img src={pic3} alt="" />
+            <img src={pic3} alt="book-Picture-Library3" />
           </SwiperSlide>
           <SwiperSlide>
-            {" "}
-            <img src={pic4} alt="" />
+            <img src={pic4} alt="book-Picture-Library4" />
           </SwiperSlide>
           <SwiperSlide>
-            {" "}
-            <img src={pic5} alt="" />
+            <img src={pic5} alt="book-Picture-Library5" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={pic6} alt="" />
+            <img src={pic6} alt="book-Picture-Library6" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={pic1} alt="" />
+            <img src={pic1} alt="book-Picture-Library7" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={pic8} alt="" />
+            <img src={pic8} alt="book-Picture-Library8" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={pic9} alt="" />
+            <img src={pic9} alt="book-Picture-Library9" />
           </SwiperSlide>
         </Swiper>
       </div>

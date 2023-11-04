@@ -1,0 +1,34 @@
+[
+  {
+    "image": "https://i.imgur.com/4MlJ2fC.jpg",
+    "category_name": "mystery"
+  },
+  {
+    "image": "https://i.imgur.com/7McxVJ2.jpg",
+    "category_name": "comics"
+  },
+  {
+    "image": "https://i.imgur.com/m1DWjpg.jpg",
+    "category_name": "entertainment"
+  },
+  {
+    "image": "https://i.imgur.com/9LXsFrd.jpg",
+    "category_name": "romance"
+  },
+  {
+    "image": "https://i.imgur.com/zywXyUn.jpg",
+    "category_name": "fantasy"
+  },
+  {
+    "image": "https://i.imgur.com/INWQ2cY.jpg",
+    "category_name": "biography"
+  },
+  {
+    "image": "https://i.imgur.com/FlbWssp.jpg",
+    "category_name": "history"
+  },
+  {
+    "image": "https://i.imgur.com/Kwe9h2a.jpg",
+    "category_name": "travel"
+  }
+]
