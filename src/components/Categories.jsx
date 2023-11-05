@@ -10,7 +10,7 @@ const Categories = () => {
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
-  console.log(categories);
+  // console.log(categories);
   return (
     <div className="max-w-7xl mx-auto min-h-screen my-10">
       <h1 className="text-5xl text-center font-bold my-10">
