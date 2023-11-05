@@ -3,11 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "../hooks/useAxios";
 import { Rating } from "@smastrom/react-rating";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const AllBooks = () => {
   const axios = useAxios();
+  const [showAvailableBooks, setShowAvailableBooks] = useState(false);
+
   const getBooks = async () => {
-    const res = await axios.get("/allbooks");
+    const res = await axios.get(`/allbooks`);
     return res;
   };
   const {
@@ -28,13 +31,32 @@ const AllBooks = () => {
   if (isError) {
     return <p>Something went wrong: {error}</p>;
   }
+  // const handleQuantity = (e) => {
+  //   e.preventDefault();
+  //   // setQuantity(1);
+  // };
+  // console.log(quantity);
+  const filteredBooks = showAvailableBooks
+    ? books?.data.filter((book) => book.quantity > 0)
+    : books?.data;
+  console.log(filteredBooks);
+  const toggleShowAvailableBooks = () => {
+    setShowAvailableBooks(!showAvailableBooks);
+  };
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto space-y-5 my-4 md:my-10">
       <h1 className="text-center text-6xl">
-        Total Number of Books: {books.data.length}
+        Total Number of Books: {filteredBooks.length}
       </h1>
+      <div className="flex justify-center">
+        <button onClick={toggleShowAvailableBooks} className="btn btn-primary">
+          {showAvailableBooks
+            ? "Show All books"
+            : "Filter Only Available books"}
+        </button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {books?.data.map((book) => (
+        {filteredBooks.map((book) => (
           <div key={book._id}>
             <div className="card card-compact  bg-base-100 shadow-xl h-[500px]">
               <figure>
@@ -47,6 +69,7 @@ const AllBooks = () => {
               <div className="card-body">
                 <h2 className="card-title">{book.name}</h2>
                 <p>Author: {book.author}</p>
+                <p>Quantity: {book.quantity}</p>
                 <p>Category: {book.category}</p>
                 <p className="flex">
                   Feedback Rating:

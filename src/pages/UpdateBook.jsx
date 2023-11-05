@@ -152,7 +152,7 @@ const UpdateBook = () => {
             placeholder="Quantity Amount"
             name="quantity"
             defaultValue={bookdata.quantity}
-            min="1"
+            min="0"
             required
           />
         </div>
