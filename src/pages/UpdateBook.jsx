@@ -1,11 +1,12 @@
 import { AiOutlinePlus } from "react-icons/ai";
-import useAxios from "../hooks/useAxios";
+// import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
-
-const AddBook = () => {
-  const axios = useAxios();
+import { useLoaderData } from "react-router-dom";
+const UpdateBook = () => {
+  // const axios = useAxios();
+  const bookdata = useLoaderData();
   const notifySuccess = () =>
-    toast.success("Added the Product Successfully", {
+    toast.success("Updated the Product Successfully", {
       position: "top-center",
       autoClose: 1500,
       hideProgressBar: false,
@@ -15,6 +16,7 @@ const AddBook = () => {
       progress: undefined,
       theme: "colored",
     });
+  // console.log(bookdata);
   const handleAdd = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -24,9 +26,9 @@ const AddBook = () => {
     const quantity = form.quantity.value;
     const rating = form.rating.value;
 
-    const description = form.description.value;
+    const description = bookdata.description;
     const author = form.author.value;
-    const newbook = {
+    const updateBook = {
       name,
       category,
       image,
@@ -36,18 +38,26 @@ const AddBook = () => {
       author,
     };
     // console.log(newbook);
-    axios.post("/addbooks", newbook).then((res) => {
-      console.log(res.data);
-      if (res.data.insertedId) {
-        // alert("successfully added book");
-        notifySuccess();
-      }
-    });
+    fetch(`http://localhost:5000/book/${bookdata._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateBook),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          // alert("Updated successfully");
+          notifySuccess();
+        }
+      });
   };
   return (
     <div className="max-w-7xl mx-auto">
       <h2 className="text-center text-5xl text-gray-500  font-bold my-10">
-        Add a book
+        Update a book
       </h2>
 
       <form onSubmit={handleAdd} className="p-4">
@@ -65,6 +75,7 @@ const AddBook = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Book Name"
               name="name"
+              defaultValue={bookdata.name}
               required
             />
           </div>
@@ -78,6 +89,7 @@ const AddBook = () => {
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-5000"
               name="category"
+              defaultValue={bookdata.category}
               id=""
             >
               <option value="mystery">Mystery</option>
@@ -104,6 +116,7 @@ const AddBook = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Image Url"
               name="image"
+              defaultValue={bookdata.image}
               required
             />
           </div>
@@ -120,6 +133,7 @@ const AddBook = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Author Name"
               name="author"
+              defaultValue={bookdata.author}
               required
             />
           </div>
@@ -137,6 +151,7 @@ const AddBook = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Quantity Amount"
             name="quantity"
+            defaultValue={bookdata.quantity}
             min="1"
             required
           />
@@ -157,10 +172,11 @@ const AddBook = () => {
             name="rating"
             min="1"
             max="5"
+            defaultValue={bookdata.rating}
             required
           />
         </div>
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <label
             // for="Short Description"
             className="block mb-2 text-sm font-medium text-pink-600 dark:text-white"
@@ -175,7 +191,7 @@ const AddBook = () => {
             name="description"
             required
           />
-        </div>
+        </div> */}
         <div className="flex items-start mb-6">
           <div className="flex items-center h-5">
             <input
@@ -203,44 +219,44 @@ const AddBook = () => {
           type="submit"
           className="flex justify-center items-center mx-auto text-white bg-secondary-focus hover:bg-primary-focus focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-24 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          <AiOutlinePlus></AiOutlinePlus> Add Book
+          <AiOutlinePlus></AiOutlinePlus> Update Book
           <AiOutlinePlus></AiOutlinePlus>
         </button>
       </form>
       {/* <form className="card-body">
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Email</span>
-        </label>
-        <input
-          type="email"
-          placeholder="email"
-          className="input input-bordered"
-          required
-        />
-      </div>
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Password</span>
-        </label>
-        <input
-          type="password"
-          placeholder="password"
-          className="input input-bordered"
-          required
-        />
-        <label className="label">
-          <a href="#" className="label-text-alt link link-hover">
-            Forgot password?
-          </a>
-        </label>
-      </div>
-      <div className="form-control mt-6">
-        <button className="btn btn-primary">Login</button>
-      </div>
-    </form> */}
+  <div className="form-control">
+    <label className="label">
+      <span className="label-text">Email</span>
+    </label>
+    <input
+      type="email"
+      placeholder="email"
+      className="input input-bordered"
+      required
+    />
+  </div>
+  <div className="form-control">
+    <label className="label">
+      <span className="label-text">Password</span>
+    </label>
+    <input
+      type="password"
+      placeholder="password"
+      className="input input-bordered"
+      required
+    />
+    <label className="label">
+      <a href="#" className="label-text-alt link link-hover">
+        Forgot password?
+      </a>
+    </label>
+  </div>
+  <div className="form-control mt-6">
+    <button className="btn btn-primary">Login</button>
+  </div>
+</form> */}
     </div>
   );
 };
 
-export default AddBook;
+export default UpdateBook;

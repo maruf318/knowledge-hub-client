@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
 import useAxios from "../hooks/useAxios";
 import { Rating } from "@smastrom/react-rating";
+import { Link } from "react-router-dom";
 
 const AllBooks = () => {
   const axios = useAxios();
@@ -57,7 +58,10 @@ const AllBooks = () => {
                 </p>
 
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Details</button>
+                  {/* <button className="btn btn-primary">Update</button> */}
+                  <Link to={`/updateBook/${book._id}`}>
+                    <button className="btn">Update Book</button>
+                  </Link>
                 </div>
               </div>
             </div>

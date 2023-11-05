@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import AddBook from "../pages/AddBook";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import UpdateBook from "../pages/UpdateBook";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,12 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register></Register>,
+      },
+      {
+        path: "updateBook/:id",
+        element: <UpdateBook></UpdateBook>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
     ],
   },
