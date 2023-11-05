@@ -1,15 +1,40 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import "../../src/App.css";
 // import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import useAxios from "../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 const Categories = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    fetch("categories.json")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-  }, []);
+  // const [categories, setCategories] = useState([]);
+  const axios = useAxios();
+  const getCategories = async () => {
+    const res = await axios.get("/categories");
+    return res;
+  };
+  const {
+    data: categories,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+  // console.log(books?.data);
+  if (isLoading) {
+    return (
+      <p className="text-center text-7xl">LOADING........................</p>
+    );
+  }
+  if (isError) {
+    return <p>Something went wrong: {error}</p>;
+  }
+  // useEffect(() => {
+  //   fetch("categories.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setCategories(data));
+  // }, []);
   // console.log(categories);
   return (
     <div className="max-w-7xl mx-auto min-h-screen my-10">
@@ -17,7 +42,7 @@ const Categories = () => {
         8 Book categories here
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {categories.map((category, index) => (
+        {categories?.data.map((category, index) => (
           <div key={index} className="card card-compact bg-base-100 shadow-xl">
             <figure>
               <img
