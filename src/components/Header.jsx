@@ -28,7 +28,8 @@ const Header = () => {
               ? "font-extrabold border-2 border-y-gray-600"
               : "bg-secondary font-semibold"
           }
-          to={user ? "/addbook" : "/login"}
+          // to={user ? "/addbook" : "/login"}
+          to={"/addbook"}
         >
           Add Book
         </NavLink>
@@ -43,7 +44,8 @@ const Header = () => {
               ? "font-extrabold border-2 border-y-gray-600"
               : "bg-secondary font-semibold"
           }
-          to={user ? "/borrowedbooks" : "/login"}
+          // to={user ? "/borrowedbooks" : "/login"}
+          to={"/borrowedbooks"}
         >
           Borrowed Books
         </NavLink>
@@ -58,7 +60,7 @@ const Header = () => {
               ? "font-extrabold border-2 border-y-gray-600"
               : "bg-secondary font-semibold"
           }
-          to={user ? "/allbooks" : "/login"}
+          to={"/allbooks"}
         >
           All Books
         </NavLink>

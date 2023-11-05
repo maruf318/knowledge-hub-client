@@ -1,8 +1,35 @@
 import { AiOutlinePlus } from "react-icons/ai";
+import useAxios from "../hooks/useAxios";
 
 const AddBook = () => {
+  const axios = useAxios();
   const handleAdd = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const category = form.category.value;
+    const image = form.image.value;
+    const quantity = form.quantity.value;
+    const rating = form.rating.value;
+
+    const description = form.description.value;
+    const author = form.author.value;
+    const newbook = {
+      name,
+      category,
+      image,
+      quantity,
+      rating,
+      description,
+      author,
+    };
+    // console.log(newbook);
+    axios.post("/addbooks", newbook).then((res) => {
+      console.log(res.data);
+      if (res.data.insertedId) {
+        alert("successfully added book");
+      }
+    });
   };
   return (
     <div className="max-w-7xl mx-auto">
@@ -96,7 +123,8 @@ const AddBook = () => {
             id="quantity"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Quantity Amount"
-            name="Quantity"
+            name="quantity"
+            min="1"
             required
           />
         </div>
