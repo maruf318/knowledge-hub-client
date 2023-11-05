@@ -1,6 +1,6 @@
 const Subscription = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <section className="py-20 relative z-50">
         <div className="container">
           <div className="mx-auto max-w-2xl sm:text-center">
@@ -96,7 +96,7 @@ const Subscription = () => {
                       <div className="text-center pt-10">
                         <h5 className="text-xl font-semibold">Professional</h5>
                         <h2 className="text-5xl mt-8 mb-3 items-center align-middle">
-                          <sup className="text-2xl align-middle">$</sup>69
+                          <sup className="text-2xl align-middle">$</sup>15
                         </h2>
                         <span>per user, per month</span>
                       </div>
@@ -164,7 +164,7 @@ const Subscription = () => {
               <div className="text-center pt-10">
                 <h5 className="text-xl font-semibold">Ultimate</h5>
                 <h2 className="text-5xl mt-8 mb-3 items-center align-middle">
-                  <sup className="text-2xl align-middle">$</sup>89
+                  <sup className="text-2xl align-middle">$</sup>19
                 </h2>
                 <span>per user, per month</span>
               </div>

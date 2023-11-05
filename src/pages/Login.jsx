@@ -1,14 +1,71 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
 import Lottie from "lottie-react";
 import loginAnimation from "../assets/loginAnimation.json";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { logIn, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate(null);
+  const location = useLocation();
+  const notifySuccess = () =>
+    toast.success("Logged in Successful", {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  const notifyError = (error) =>
+    toast.error(error, {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   const handleLogin = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
+    logIn(email, password)
+      .then(() => {
+        notifySuccess();
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.error(error);
+        notifyError(error.message);
+      });
   };
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        // swal(
+        //   "Google Login",
+        //   "You are one step away of your events ",
+        //   "success"
+        // );
+        notifySuccess();
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        // setErrorText(error.message);
+        // swal("Error", errorText, "error");
+        notifyError(error.message);
+      });
+  };
   return (
     <div>
       <h1 className="text-5xl font-bold text-center text-gray-500 md:my-10">

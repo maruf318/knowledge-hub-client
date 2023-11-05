@@ -1,8 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import pic from "../../src/assets/book-plant.png";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Header = () => {
-  const user = true;
+  // const user = true;
+  const { user, logOut } = useContext(AuthContext);
   const navLinks = (
     <>
       <li>
@@ -61,6 +64,9 @@ const Header = () => {
       </li>
     </>
   );
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
   return (
     <div className="max-w-7xl mx-auto">
       <div className="navbar bg-base-100 relative">
@@ -100,11 +106,15 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          <Link to={"/login"}>
-            <button className=" btn btn-secondary hover:btn-primary">
-              Login
+          {user ? (
+            <button onClick={handleLogOut} className="btn bg-black text-white">
+              LOGOUT
             </button>
-          </Link>
+          ) : (
+            <Link to={"/login"}>
+              <a className="btn bg-black text-white">Sign In</a>
+            </Link>
+          )}
         </div>
       </div>
     </div>
