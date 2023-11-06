@@ -2,9 +2,24 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { useLoaderData } from "react-router-dom";
 
 const BorrowedBook = () => {
   const { user } = useContext(AuthContext);
+  const loadedData = useLoaderData();
+  console.log(loadedData);
+  const notifySuccess = () =>
+    toast.success("Returned Successfully !!", {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
   //http://localhost:5000/cart?email=library@gmail.com
   const axios = useAxios();
@@ -19,6 +34,7 @@ const BorrowedBook = () => {
     isLoading,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["cart"],
     queryFn: getCarts,
@@ -33,6 +49,40 @@ const BorrowedBook = () => {
     return <p>Something went wrong: {error}</p>;
   }
   console.log(cart.data);
+  const handleDelete = (_id, name) => {
+    // console.log(_id);
+    fetch(`http://localhost:5000/cart/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        refetch();
+        if (data.acknowledged) {
+          notifySuccess();
+        }
+      });
+    console.log(_id, name);
+
+    //patch quantity
+    const data = loadedData.find((load) => load.name == name);
+    // console.log(data);
+    const quantity = { quantity: parseInt(data.quantity) + 1 };
+    console.log(quantity);
+    // console.log(name);
+    fetch(`http://localhost:5000/cart/${name}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(quantity),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        refetch();
+      });
+  };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -56,7 +106,12 @@ const BorrowedBook = () => {
                   Return Date: {book.returnDate}
                 </p>
                 <div className="card-actions">
-                  <button className="btn btn-primary">Return</button>
+                  <button
+                    onClick={() => handleDelete(book._id, book.name)}
+                    className="btn btn-primary"
+                  >
+                    Return
+                  </button>
                 </div>
               </div>
             </div>
