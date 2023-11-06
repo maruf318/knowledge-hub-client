@@ -5,6 +5,7 @@ import "../../src/App.css";
 import { FiArrowRight } from "react-icons/fi";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 const Categories = () => {
   // const [categories, setCategories] = useState([]);
   const axios = useAxios();
@@ -57,9 +58,11 @@ const Categories = () => {
               </h2>
 
               <div className="card-actions flex justify-end">
-                <button className="btn btn-secondary capitalize text-primary-content ">
-                  Explore <FiArrowRight></FiArrowRight>
-                </button>
+                <Link to={`/category/${category.category_name}`}>
+                  <button className="btn btn-secondary capitalize text-primary-content ">
+                    Explore <FiArrowRight></FiArrowRight>
+                  </button>
+                </Link>
                 {/* <Link to={"/addproduct"}>
                   <button
                     style={{ "--clr": "#ff1867" }}

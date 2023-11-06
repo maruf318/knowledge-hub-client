@@ -9,6 +9,8 @@ import AddBook from "../pages/AddBook";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import UpdateBook from "../pages/UpdateBook";
+import BookDetails from "../pages/BookDetails";
+import SingleBookDetails from "../pages/SingleBookDetails";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register></Register>,
+      },
+      {
+        path: "category/:id",
+        element: <BookDetails></BookDetails>,
+      },
+      {
+        path: "book/:id",
+        element: <SingleBookDetails></SingleBookDetails>,
       },
       {
         path: "updateBook/:id",
