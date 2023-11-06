@@ -39,7 +39,7 @@ const AllBooks = () => {
   const filteredBooks = showAvailableBooks
     ? books?.data.filter((book) => book.quantity > 0)
     : books?.data;
-  console.log(filteredBooks);
+  // console.log(filteredBooks);
   const toggleShowAvailableBooks = () => {
     setShowAvailableBooks(!showAvailableBooks);
   };

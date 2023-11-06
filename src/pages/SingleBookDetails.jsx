@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 
@@ -36,7 +36,7 @@ const SingleBookDetails = () => {
 
       <div className="flex h-full mx-auto border border-pink-500 justify-center items-center  p-2 gap-4 flex-col lg:flex-row">
         <div className="flex-1  lg:h-full">
-          <img className="lg:h-full" src={book.data.image} alt="" />
+          <img className="lg:h-full  rounded-lg" src={book.data.image} alt="" />
         </div>
         <div className="flex-1 text-gray-500 space-y-2 md:space-y-4">
           <h2 className="text-5xl text-center text-secondary font-extrabold">
@@ -46,26 +46,34 @@ const SingleBookDetails = () => {
             category: {book.data.category}
           </h2>
           <h2 className="text-2xl text-center">Author: {book.data.author}</h2>
-          {/* <h2 className="font-bold text-center">Car Type: {loadedCar.type}</h2> */}
-          <button
-            // onClick={handleCart}
-            className="btn  btn-ghost bg-primary text-white w-full"
-          >
-            Borrow
-            {/* <BsCarFront></BsCarFront> */}
-          </button>
-          <button
-            // onClick={handleCart}
-            className="btn  btn-ghost bg-secondary text-white w-full"
-          >
-            Read
-            {/* <BsCarFront></BsCarFront> */}
-          </button>
+          <h2 className="text-2xl text-center">
+            Available Copies: {book.data.quantity}
+          </h2>
+
+          {parseInt(book.data.quantity) ? (
+            <button
+              // onClick={handleCart}
+              className="btn  btn-ghost bg-primary text-white w-full"
+            >
+              Borrow
+            </button>
+          ) : (
+            <button
+              disabled
+              // onClick={handleCart}
+              className="btn cursor-not-allowed btn-ghost bg-primary text-white w-full"
+            >
+              Borrow
+            </button>
+          )}
+          <Link to={`/read/${book.data._id}`}>
+            <button className="btn mt-4  btn-ghost bg-secondary text-white w-full">
+              Read
+            </button>
+          </Link>
         </div>
       </div>
-      {/* <h2 className="text-xl text-gray-500">
-        Description: {book.data.description}
-      </h2> */}
+
       {/* newslater email subscribe */}
       <div className="relative flex flex-col items-center justify-center overflow-hidden  p-8 ">
         <div className="w-full max-w-4xl rounded-md border-2 border-gray-100 bg-white p-14">
