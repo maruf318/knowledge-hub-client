@@ -4,6 +4,8 @@ import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
+import cat from "../assets/cat.json";
+import Lottie from "lottie-react";
 
 const BorrowedBook = () => {
   const { user } = useContext(AuthContext);
@@ -86,38 +88,54 @@ const BorrowedBook = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h2 className="text-center">
-        This is borrowed book section of {user.email}
+      <h2 className="text-center text-3xl font-semibold text-gray-400 mt-10">
+        {/* This is borrowed book section of {user?.email} */}
+        Your Books
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {cart?.data?.map((book) => (
-          <div key={book._id}>
-            <div className="card bg-base-100 shadow-xl min-h-[600px]">
-              <figure className="px-10 pt-10">
-                <img className="rounded-lg h-[250px] w-full" src={book.image} />
-              </figure>
-              <div className="card-body items-center text-center">
-                <h2 className="card-title">{book.name}</h2>
-                <p>
-                  Category: <span className="capitalize">{book.category}</span>
-                </p>
-                <p>Borrowed Date: {book.borrowedDate}</p>
-                <p className="text-red-600 font-bold">
-                  Return Date: {book.returnDate}
-                </p>
-                <div className="card-actions">
-                  <button
-                    onClick={() => handleDelete(book._id, book.name)}
-                    className="btn btn-primary"
-                  >
-                    Return
-                  </button>
+      {cart.data.length ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {cart?.data?.map((book) => (
+            <div key={book._id}>
+              <div className="card bg-base-100 shadow-xl min-h-[600px]">
+                <figure className="px-10 pt-10">
+                  <img
+                    className="rounded-lg h-[250px] w-full"
+                    src={book.image}
+                  />
+                </figure>
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title">{book.name}</h2>
+                  <p>
+                    Category:{" "}
+                    <span className="capitalize">{book.category}</span>
+                  </p>
+                  <p>Borrowed Date: {book.borrowedDate}</p>
+                  <p className="text-red-600 font-bold">
+                    Return Date: {book.returnDate}
+                  </p>
+                  <div className="card-actions">
+                    <button
+                      onClick={() => handleDelete(book._id, book.name)}
+                      className="btn btn-primary"
+                    >
+                      Return
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+      ) : (
+        <div className="min-h-[70vh] mt-10">
+          <h1 className="text-center text-2xl font-bold ">
+            You Have not Borrowed any books yet!!! Please borrow some
+          </h1>
+          <div className="w-1/2 h-1/2 flex justify-center items-center mx-auto">
+            <Lottie animationData={cat}></Lottie>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

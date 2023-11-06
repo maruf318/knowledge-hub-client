@@ -13,6 +13,17 @@ const SingleBookDetails = () => {
   const current = new Date();
   const loadedData = useLoaderData();
   const [modalOpen, setModalOpen] = useState(true);
+  const getDate = () => {
+    const today = new Date();
+    const nextWeek = new Date(today);
+    nextWeek.setDate(today.getDate() + 7);
+
+    const yyyy = nextWeek.getFullYear();
+    const mm = String(nextWeek.getMonth() + 1).padStart(2, "0");
+    const dd = String(nextWeek.getDate()).padStart(2, "0");
+
+    return `${yyyy}-${mm}-${dd}`;
+  };
   const notifySuccess = () =>
     toast.success("Added to your Borrowed Books", {
       position: "top-center",
@@ -154,10 +165,10 @@ const SingleBookDetails = () => {
                 >
                   <div className="modal-box">
                     <h3 className="font-bold text-lg text-center mb-4">
-                      Please Choose a return date
+                      We can only offer you 7 days for return
                     </h3>
 
-                    <p className="py-4">
+                    <p className="py-4 text-center">
                       Note: We charge $5 per day for late submission
                     </p>
                     <div className="modal-action flex justify-center">
@@ -167,11 +178,13 @@ const SingleBookDetails = () => {
                         method="dialog"
                       >
                         <input
-                          className=" text-2xl bg-secondary text-white p-2 rounded-lg "
+                          className=" text-2xl mr-2 bg-secondary text-white p-2 rounded-lg "
                           type="date"
                           name="date"
                           id=""
                           required
+                          value={getDate()}
+                          readOnly
                         />
                         {/* <input type="text" name="name" id="" /> */}
                         <input
