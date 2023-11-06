@@ -1,11 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const SingleBookDetails = () => {
+  const { user } = useContext(AuthContext);
   const axios = useAxios();
   const params = useParams();
   const current = new Date();
+  const [modalOpen, setModalOpen] = useState(true);
+
   const date = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
@@ -18,6 +23,7 @@ const SingleBookDetails = () => {
     isLoading,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["book"],
     queryFn: getBook,
@@ -31,7 +37,43 @@ const SingleBookDetails = () => {
   if (isError) {
     return <p>Something went wrong: {error}</p>;
   }
-  // console.log(book?.data);
+  console.log(book?.data);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(e.target.date.value, e.target.name.value);
+    const returnDate = e.target.date.value;
+    setModalOpen(false);
+    const sendingData = {
+      email: user.email,
+
+      image: book.data.image,
+      name: book.data.name,
+      category: book.data.category,
+      borrowedDate: date,
+      returnDate: returnDate,
+    };
+    console.log(sendingData);
+    axios
+      .post("http://localhost:5000/cart", sendingData)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
+    // console.log(parseInt(book.data.quantity) - 1);
+    const quantity = { quantity: parseInt(book.data.quantity) - 1 };
+    console.log(quantity);
+    fetch(`http://localhost:5000/borrow/${book.data._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(quantity),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        refetch();
+      });
+  };
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-center font-semibold border-y-4 my-4 text-gray-500 border-red-900">
@@ -71,33 +113,47 @@ const SingleBookDetails = () => {
               >
                 Borrow
               </button>
-              <dialog
-                id="my_modal_5"
-                className="modal modal-bottom sm:modal-middle"
-              >
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg text-center mb-4">
-                    Please Choose a return date
-                  </h3>
-                  <input
-                    className="flex mx-auto text-2xl bg-secondary text-white p-2 rounded-lg "
-                    type="date"
-                    name="date"
-                    id=""
-                  />
-                  <p className="py-4">
-                    Note: We charge $5 per day for late submission
-                  </p>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      {/* if there is a button in form, it will close the modal */}
-                      <button className="btn bg-primary text-white">
+              {modalOpen && (
+                <dialog
+                  id="my_modal_5"
+                  className="modal modal-bottom sm:modal-middle"
+                >
+                  <div className="modal-box">
+                    <h3 className="font-bold text-lg text-center mb-4">
+                      Please Choose a return date
+                    </h3>
+
+                    <p className="py-4">
+                      Note: We charge $5 per day for late submission
+                    </p>
+                    <div className="modal-action flex justify-center">
+                      <form
+                        className=""
+                        onSubmit={handleSubmit}
+                        method="dialog"
+                      >
+                        <input
+                          className=" text-2xl bg-secondary text-white p-2 rounded-lg "
+                          type="date"
+                          name="date"
+                          id=""
+                          required
+                        />
+                        {/* <input type="text" name="name" id="" /> */}
+                        <input
+                          className="btn bg-primary "
+                          type="submit"
+                          value="Submit"
+                        />
+                        {/* if there is a button in form, it will close the modal */}
+                        {/* <button className="btn bg-primary text-white">
                         Submit
-                      </button>
-                    </form>
+                      </button> */}
+                      </form>
+                    </div>
                   </div>
-                </div>
-              </dialog>
+                </dialog>
+              )}
             </div>
           ) : (
             <button
@@ -113,6 +169,12 @@ const SingleBookDetails = () => {
               Read
             </button>
           </Link>
+          {!modalOpen && (
+            <p>
+              Note: we are processing your book now. You cant borrow same book
+              again
+            </p>
+          )}
         </div>
       </div>
 
