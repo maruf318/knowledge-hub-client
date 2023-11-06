@@ -8,7 +8,7 @@ import { useLoaderData } from "react-router-dom";
 const BorrowedBook = () => {
   const { user } = useContext(AuthContext);
   const loadedData = useLoaderData();
-  console.log(loadedData);
+  // console.log(loadedData);
   const notifySuccess = () =>
     toast.success("Returned Successfully !!", {
       position: "top-center",
@@ -48,7 +48,7 @@ const BorrowedBook = () => {
   if (isError) {
     return <p>Something went wrong: {error}</p>;
   }
-  console.log(cart.data);
+  // console.log(cart.data);
   const handleDelete = (_id, name) => {
     // console.log(_id);
     fetch(`http://localhost:5000/cart/${_id}`, {
@@ -56,19 +56,19 @@ const BorrowedBook = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         refetch();
         if (data.acknowledged) {
           notifySuccess();
         }
       });
-    console.log(_id, name);
+    // console.log(_id, name);
 
     //patch quantity
     const data = loadedData.find((load) => load.name == name);
     // console.log(data);
     const quantity = { quantity: parseInt(data.quantity) + 1 };
-    console.log(quantity);
+    // console.log(quantity);
     // console.log(name);
     fetch(`http://localhost:5000/cart/${name}`, {
       method: "PATCH",
@@ -94,7 +94,7 @@ const BorrowedBook = () => {
           <div key={book._id}>
             <div className="card bg-base-100 shadow-xl min-h-[600px]">
               <figure className="px-10 pt-10">
-                <img className="rounded-lg h-[250px]" src={book.image} />
+                <img className="rounded-lg h-[250px] w-full" src={book.image} />
               </figure>
               <div className="card-body items-center text-center">
                 <h2 className="card-title">{book.name}</h2>

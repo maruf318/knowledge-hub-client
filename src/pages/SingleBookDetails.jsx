@@ -1,15 +1,36 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const SingleBookDetails = () => {
   const { user } = useContext(AuthContext);
   const axios = useAxios();
   const params = useParams();
+  const navigate = useNavigate(null);
   const current = new Date();
+  const loadedData = useLoaderData();
   const [modalOpen, setModalOpen] = useState(true);
+  const notifySuccess = () =>
+    toast.success("Added to your Borrowed Books", {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  // const getUser = async () => {
+  //   const res = await axios.get(`/cart?email=${user.email}`);
+  //   console.log(res.data);
+  //   return res.data;
+  // };
+  // console.log(loadedData);
 
   const date = `${current.getDate()}/${
     current.getMonth() + 1
@@ -37,8 +58,12 @@ const SingleBookDetails = () => {
   if (isError) {
     return <p>Something went wrong: {error}</p>;
   }
-  console.log(book?.data);
-
+  // console.log(book?.data);
+  const available = loadedData.filter(
+    (data) => data.email == user?.email && data.name == book.data.name
+  );
+  // console.log(available);
+  // refetch();
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e.target.date.value, e.target.name.value);
@@ -53,14 +78,14 @@ const SingleBookDetails = () => {
       borrowedDate: date,
       returnDate: returnDate,
     };
-    console.log(sendingData);
+    // console.log(sendingData);
     axios
       .post("http://localhost:5000/cart", sendingData)
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error));
     // console.log(parseInt(book.data.quantity) - 1);
     const quantity = { quantity: parseInt(book.data.quantity) - 1 };
-    console.log(quantity);
+    // console.log(quantity);
     fetch(`http://localhost:5000/borrow/${book.data._id}`, {
       method: "PATCH",
       headers: {
@@ -71,7 +96,16 @@ const SingleBookDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        // const available = getUser();
+        // console.log(available);
         refetch();
+        navigate(-1);
+        notifySuccess();
+
+        // const findData = available.data.find((data) => {
+        //   data.name == book.data.name;
+        // });
+        // console.log(findData);
       });
   };
   return (
@@ -100,7 +134,7 @@ const SingleBookDetails = () => {
             Available Copies: {book.data.quantity}
           </h2>
 
-          {parseInt(book.data.quantity) ? (
+          {parseInt(book.data.quantity) && !available.length ? (
             // <button className="btn  btn-ghost bg-primary text-white w-full">
             //   Borrow
             // </button>
@@ -175,6 +209,7 @@ const SingleBookDetails = () => {
               again
             </p>
           )}
+          {/* {available.length ? <p>not available</p> : <p>Note: Hurry! Book is still available</p>} */}
         </div>
       </div>
 

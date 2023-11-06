@@ -12,11 +12,13 @@ import UpdateBook from "../pages/UpdateBook";
 import BookDetails from "../pages/BookDetails";
 import SingleBookDetails from "../pages/SingleBookDetails";
 import ReadBook from "../pages/ReadBook";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -58,6 +60,7 @@ const router = createBrowserRouter([
       {
         path: "book/:id",
         element: <SingleBookDetails></SingleBookDetails>,
+        loader: () => fetch("http://localhost:5000/cart"),
       },
       {
         path: "read/:id",
