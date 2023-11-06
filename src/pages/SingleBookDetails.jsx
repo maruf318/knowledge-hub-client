@@ -5,6 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 const SingleBookDetails = () => {
   const axios = useAxios();
   const params = useParams();
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
   const getBook = async () => {
     const res = await axios.get(`/book/${params.id}`);
     return res;
@@ -31,19 +35,23 @@ const SingleBookDetails = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-center font-semibold border-y-4 my-4 text-gray-500 border-red-900">
-        This is single book details
+        Today is {date}
       </h1>
 
-      <div className="flex h-full mx-auto border border-pink-500 justify-center items-center  p-2 gap-4 flex-col lg:flex-row">
+      <div className="flex h-full mx-auto border border-pink-400 rounded-lg justify-center items-center  p-2 gap-4 lg:gap-12 flex-col lg:flex-row">
         <div className="flex-1  lg:h-full">
-          <img className="lg:h-full  rounded-lg" src={book.data.image} alt="" />
+          <img
+            className="lg:h-[70vh] w-full  rounded-lg"
+            src={book.data.image}
+            alt=""
+          />
         </div>
         <div className="flex-1 text-gray-500 space-y-2 md:space-y-4">
           <h2 className="text-5xl text-center text-secondary font-extrabold">
             {book.data.name}
           </h2>
           <h2 className="text-3xl text-center font-bold">
-            category: {book.data.category}
+            Category: <span className="capitalize">{book.data.category}</span>
           </h2>
           <h2 className="text-2xl text-center">Author: {book.data.author}</h2>
           <h2 className="text-2xl text-center">
@@ -51,12 +59,46 @@ const SingleBookDetails = () => {
           </h2>
 
           {parseInt(book.data.quantity) ? (
-            <button
-              // onClick={handleCart}
-              className="btn  btn-ghost bg-primary text-white w-full"
-            >
-              Borrow
-            </button>
+            // <button className="btn  btn-ghost bg-primary text-white w-full">
+            //   Borrow
+            // </button>
+            <div>
+              <button
+                className="btn  btn-ghost bg-primary text-white w-full"
+                onClick={() =>
+                  document.getElementById("my_modal_5").showModal()
+                }
+              >
+                Borrow
+              </button>
+              <dialog
+                id="my_modal_5"
+                className="modal modal-bottom sm:modal-middle"
+              >
+                <div className="modal-box">
+                  <h3 className="font-bold text-lg text-center mb-4">
+                    Please Choose a return date
+                  </h3>
+                  <input
+                    className="flex mx-auto text-2xl bg-secondary text-white p-2 rounded-lg "
+                    type="date"
+                    name="date"
+                    id=""
+                  />
+                  <p className="py-4">
+                    Note: We charge $5 per day for late submission
+                  </p>
+                  <div className="modal-action">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn bg-primary text-white">
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+            </div>
           ) : (
             <button
               disabled

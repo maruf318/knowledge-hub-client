@@ -98,7 +98,7 @@ const Header = () => {
               {navLinks}
             </ul>
           </div>
-          <a className=" flex items-center normal-case text-pink-700 text-2xl font-extrabold">
+          <a className=" flex items-center normal-case text-pink-700 text-2xl  lg:text-3xl font-extrabold">
             <span className="">
               <img src={pic} alt="" />
             </span>
