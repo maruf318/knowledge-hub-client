@@ -151,7 +151,7 @@ const Header = () => {
                 </button>
               ) : (
                 <Link to={"/login"}>
-                  <a className="btn bg-black text-white">Sign In</a>
+                  <button className="btn bg-black text-white">Sign In</button>
                 </Link>
               )}
             </div>

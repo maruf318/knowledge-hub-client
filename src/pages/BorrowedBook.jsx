@@ -1,16 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { useLoaderData } from "react-router-dom";
+
 import cat from "../assets/cat.json";
 import Lottie from "lottie-react";
 
 const BorrowedBook = () => {
   const { user } = useContext(AuthContext);
-  const loadedData = useLoaderData();
-  // console.log(loadedData);
+  const axios = useAxios();
+  const [loadedData, setData] = useState([]);
   const notifySuccess = () =>
     toast.success("Returned Successfully !!", {
       position: "top-center",
@@ -22,9 +22,22 @@ const BorrowedBook = () => {
       progress: undefined,
       theme: "colored",
     });
+  useEffect(() => {
+    // fetch("http://localhost:5000/allbooks", {
+    //   credentials: "include",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setData(data);
+    //   });
+    axios.get("/allbooks").then((res) => setData(res.data));
+  }, [axios]);
+  // const loadedData = useLoaderData();
+  // console.log(loadedData);
 
   //http://localhost:5000/cart?email=library@gmail.com
-  const axios = useAxios();
+
   // const [showAvailableBooks, setShowAvailableBooks] = useState(false);
 
   const getCarts = async () => {
@@ -53,32 +66,44 @@ const BorrowedBook = () => {
   // console.log(cart.data);
   const handleDelete = (_id, name) => {
     // console.log(_id);
-    fetch(`http://localhost:5000/cart/${_id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        refetch();
-        if (data.acknowledged) {
-          notifySuccess();
-        }
-      });
+    // fetch(`http://localhost:5000/cart/${_id}`, {
+    //   method: "DELETE",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log(data);
+    //     refetch();
+    //     if (data.acknowledged) {
+    //       notifySuccess();
+    //     }
+    //   });
+    axios.delete(`/cart/${_id}`).then((res) => {
+      console.log(res.data);
+
+      if (res.data.deletedCount > 0) {
+        notifySuccess();
+      }
+      refetch();
+    });
     // console.log(_id, name);
 
     //patch quantity
-    const data = loadedData.find((load) => load.name == name);
+    const data = loadedData?.find((load) => load.name == name);
     // console.log(data);
-    const quantity = { quantity: parseInt(data.quantity) + 1 };
+    const quantity = { quantity: parseInt(data?.quantity) + 1 };
     // console.log(quantity);
     // console.log(name);
-    fetch(`http://localhost:5000/cart/${name}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
+    fetch(
+      `http://localhost:5000/cart/${name}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(quantity),
       },
-      body: JSON.stringify(quantity),
-    })
+      { credentials: "include" }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -93,7 +118,7 @@ const BorrowedBook = () => {
         Your Books
       </h2>
       {cart.data.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-5">
           {cart?.data?.map((book) => (
             <div key={book._id}>
               <div className="card bg-base-100 shadow-xl min-h-[600px]">

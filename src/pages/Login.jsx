@@ -11,7 +11,7 @@ const Login = () => {
   const { logIn, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate(null);
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const notifySuccess = () =>
     toast.success("Logged in Successful", {
       position: "top-center",

@@ -10,7 +10,7 @@ const AllBooks = () => {
   const [showAvailableBooks, setShowAvailableBooks] = useState(false);
 
   const getBooks = async () => {
-    const res = await axios.get(`/allbooks`);
+    const res = await axios.get("/allbooks");
     return res;
   };
   const {
@@ -19,7 +19,7 @@ const AllBooks = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["books"],
+    queryKey: ["book"],
     queryFn: getBooks,
   });
   // console.log(books?.data);
@@ -31,13 +31,15 @@ const AllBooks = () => {
   if (isError) {
     return <p>Something went wrong: {error}</p>;
   }
+  console.log(books);
+  console.log(showAvailableBooks);
   // const handleQuantity = (e) => {
   //   e.preventDefault();
   //   // setQuantity(1);
   // };
   // console.log(quantity);
   const filteredBooks = showAvailableBooks
-    ? books?.data.filter((book) => book.quantity > 0)
+    ? books?.data.filter((book) => book?.quantity > 0)
     : books?.data;
   // console.log(filteredBooks);
   const toggleShowAvailableBooks = () => {
@@ -46,7 +48,7 @@ const AllBooks = () => {
   return (
     <div className="max-w-7xl mx-auto space-y-5 my-4 md:my-10">
       <h1 className="text-center text-6xl dark:text-white">
-        Total Number of Books: {filteredBooks.length}
+        Total Number of Books: {filteredBooks?.length}
       </h1>
       <div className="flex justify-center">
         <button
@@ -59,33 +61,33 @@ const AllBooks = () => {
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredBooks.map((book) => (
-          <div key={book._id}>
+        {filteredBooks?.map((book) => (
+          <div key={book?._id}>
             <div className="card card-compact  bg-base-100 shadow-xl h-[500px]">
               <figure>
                 <img
                   className="w-full h-[300px]"
-                  src={book.image}
+                  src={book?.image}
                   alt="Shoes"
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{book.name}</h2>
-                <p>Author: {book.author}</p>
-                <p>Quantity: {book.quantity}</p>
-                <p>Category: {book.category}</p>
+                <h2 className="card-title">{book?.name}</h2>
+                <p>Author: {book?.author}</p>
+                <p>Quantity: {book?.quantity}</p>
+                <p>Category: {book?.category}</p>
                 <p className="flex">
                   Feedback Rating:
                   <Rating
                     style={{ maxWidth: 100 }}
-                    value={parseInt(book.rating)}
+                    value={parseInt(book?.rating)}
                     readOnly={true}
                   />
                 </p>
 
                 <div className="card-actions justify-end">
                   {/* <button className="btn btn-primary">Update</button> */}
-                  <Link to={`/updateBook/${book._id}`}>
+                  <Link to={`/updateBook/${book?._id}`}>
                     <button className="btn btn-primary dark:text-white">
                       Update Book
                     </button>

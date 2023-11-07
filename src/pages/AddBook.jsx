@@ -36,7 +36,7 @@ const AddBook = () => {
       author,
     };
     // console.log(newbook);
-    axios.post("/addbooks", newbook).then((res) => {
+    axios.post("/addbooks", newbook, { withCredentials: true }).then((res) => {
       console.log(res.data);
       if (res.data.insertedId) {
         // alert("successfully added book");

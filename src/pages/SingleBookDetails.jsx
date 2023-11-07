@@ -1,7 +1,7 @@
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,19 @@ const SingleBookDetails = () => {
   const params = useParams();
   const navigate = useNavigate(null);
   const current = new Date();
-  const loadedData = useLoaderData();
+  const [loadedData, setData] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/cart?email=${user?.email}`, {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      });
+  }, [user?.email]);
+  // const loadedData = useLoaderData();
+
   const [modalOpen, setModalOpen] = useState(true);
   const getDate = () => {
     const today = new Date();
@@ -70,7 +82,7 @@ const SingleBookDetails = () => {
     return <p>Something went wrong: {error}</p>;
   }
   // console.log(book?.data);
-  const available = loadedData.filter(
+  const available = loadedData?.filter(
     (data) => data.email == user?.email && data.name == book.data.name
   );
   // console.log(available);
@@ -91,7 +103,7 @@ const SingleBookDetails = () => {
     };
     // console.log(sendingData);
     axios
-      .post("http://localhost:5000/cart", sendingData)
+      .post("/cart", sendingData)
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error));
     // console.log(parseInt(book.data.quantity) - 1);

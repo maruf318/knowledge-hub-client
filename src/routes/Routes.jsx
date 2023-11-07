@@ -31,7 +31,7 @@ const router = createBrowserRouter([
             <BorrowedBook></BorrowedBook>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/allbooks"),
+        // loader: () => fetch("http://localhost:5000/allbooks"),
       },
       {
         path: "allbooks",
@@ -68,7 +68,6 @@ const router = createBrowserRouter([
             <SingleBookDetails></SingleBookDetails>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/cart"),
       },
       {
         path: "read/:id",
