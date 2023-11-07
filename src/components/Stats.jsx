@@ -1,8 +1,10 @@
 import award from "../../src/assets/award.jpg";
 const Stats = () => {
   return (
-    <div className="max-w-7xl mx-auto">
-      <h2 className=" text-center text-2xl font-bold">Our Book Statistics</h2>
+    <div className="max-w-7xl mx-auto my-4">
+      <h2 className=" text-center text-5xl dark:text-white font-bold my-8">
+        Our Book Statistics
+      </h2>
       <div className="stats shadow flex flex-col md:flex-row  text-center ">
         <div className="stat">
           <div className="stat-figure text-primary">
@@ -20,8 +22,8 @@ const Stats = () => {
               ></path>
             </svg>
           </div>
-          <div className="stat-title">Total Bookings</div>
-          <div className="stat-value text-primary">25.6K</div>
+          <div className="stat-title">Total Borrowed</div>
+          <div className="stat-value text-primary">32.3K</div>
           <div className="stat-desc">31% more than last month</div>
         </div>
 

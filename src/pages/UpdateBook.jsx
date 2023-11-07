@@ -6,7 +6,7 @@ const UpdateBook = () => {
   // const axios = useAxios();
   const bookdata = useLoaderData();
   const notifySuccess = () =>
-    toast.success("Updated the Product Successfully", {
+    toast.success("Updated the Book Successfully", {
       position: "top-center",
       autoClose: 1500,
       hideProgressBar: false,

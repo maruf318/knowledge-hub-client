@@ -53,7 +53,7 @@ const ReadBook = () => {
           <div className="card-actions justify-center">
             <button
               onClick={() => generatePDF(targetRef, { filename: "page.pdf" })}
-              className="btn btn-primary capitalize"
+              className="btn btn-primary capitalize dark:text-white"
             >
               Download PDF
             </button>
@@ -61,7 +61,7 @@ const ReadBook = () => {
         </div>
       </div>
       <div>
-        <h1 className="text-center text-secondary border-y-2 text-3xl font-bold my-6">
+        <h1 className="text-center text-secondary underline text-3xl font-bold my-6">
           Our Popular Books
         </h1>
 

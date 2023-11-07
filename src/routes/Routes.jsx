@@ -35,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "allbooks",
-        element: <AllBooks></AllBooks>,
+        element: (
+          <PrivateRoute>
+            <AllBooks></AllBooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "addbook",
@@ -59,7 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: "book/:id",
-        element: <SingleBookDetails></SingleBookDetails>,
+        element: (
+          <PrivateRoute>
+            <SingleBookDetails></SingleBookDetails>
+          </PrivateRoute>
+        ),
         loader: () => fetch("http://localhost:5000/cart"),
       },
       {

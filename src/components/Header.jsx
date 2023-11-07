@@ -3,9 +3,11 @@ import pic from "../../src/assets/book-plant.png";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import icon from "../../src/assets/avatar.gif";
+import { useTheme } from "../hooks/useTheme";
+import { MdOutlineLightMode, MdOutlineNightlight } from "react-icons/md";
 
 const Header = () => {
-  // const user = true;
+  const { changeTheme, mode } = useTheme();
   const { user, logOut } = useContext(AuthContext);
   const navLinks = (
     <>
@@ -13,8 +15,8 @@ const Header = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "font-extrabold border-2 border-y-gray-600"
-              : "bg-secondary font-semibold"
+              ? "font-extrabold dark:text-white  border-2 border-y-gray-600"
+              : "bg-secondary dark:text-white font-semibold"
           }
           to={"/"}
         >
@@ -25,8 +27,8 @@ const Header = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "font-extrabold border-2 border-y-gray-600"
-              : "bg-secondary font-semibold"
+              ? "font-extrabold dark:text-white border-2 border-y-gray-600"
+              : "bg-secondary dark:text-white font-semibold"
           }
           // to={user ? "/addbook" : "/login"}
           to={"/addbook"}
@@ -41,8 +43,8 @@ const Header = () => {
           // }
           className={({ isActive }) =>
             isActive
-              ? "font-extrabold border-2 border-y-gray-600"
-              : "bg-secondary font-semibold"
+              ? "font-extrabold dark:text-white border-2 border-y-gray-600"
+              : "bg-secondary dark:text-white font-semibold"
           }
           // to={user ? "/borrowedbooks" : "/login"}
           to={"/borrowedbooks"}
@@ -57,8 +59,8 @@ const Header = () => {
           // }
           className={({ isActive }) =>
             isActive
-              ? "font-extrabold border-2 border-y-gray-600"
-              : "bg-secondary font-semibold"
+              ? "font-extrabold dark:text-white border-2 border-y-gray-600"
+              : "bg-secondary dark:text-white font-semibold"
           }
           to={"/allbooks"}
         >
@@ -72,7 +74,7 @@ const Header = () => {
   };
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="navbar bg-base-100 relative">
+      <div className="navbar  relative">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -102,7 +104,7 @@ const Header = () => {
             <span className="">
               <img src={pic} alt="" />
             </span>
-            Knowledge<span className="text-gray-700">Hub</span>
+            Knowledge<span className="text-gray-700 dark:text-white">Hub</span>
           </a>
         </div>
         <div className="navbar-center z-10 hidden lg:flex">
@@ -111,14 +113,24 @@ const Header = () => {
         <div className="navbar-end grid space-y-2 items-center content-center">
           <div>
             {user?.displayName ? (
-              <p className="text-red-600 border-x-2 text-center">
+              <p className="text-gray-500 border-x-2 text-center">
                 User: {user.displayName}
               </p>
             ) : (
               ""
             )}
           </div>
-          <div className="justify-center  items-center mx-auto flex">
+          <div className="justify-center  items-center mx-auto flex md:gap-4">
+            <button
+              className="dark:text-white md:text-2xl"
+              onClick={changeTheme}
+            >
+              {mode === "dark" ? (
+                <MdOutlineLightMode></MdOutlineLightMode>
+              ) : (
+                <MdOutlineNightlight></MdOutlineNightlight>
+              )}
+            </button>
             <div className="avatar">
               <div className="w-8 rounded-full">
                 {/* <img src={icon} /> */}
@@ -133,7 +145,7 @@ const Header = () => {
               {user ? (
                 <button
                   onClick={handleLogOut}
-                  className="btn bg-black text-white"
+                  className="bg-primary text-xs px-1 py-2 md:btn md:btn-primary rounded-lg dark:text-white  text-black"
                 >
                   LOGOUT
                 </button>

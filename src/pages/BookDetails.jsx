@@ -31,10 +31,10 @@ const BookDetails = () => {
   // console.log(category.data);
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <h1 className="text-center text-3xl font-bold">
-        {" "}
-        We have {category.data.length} books of {params.id}
+    <div className="max-w-7xl mx-auto my-4">
+      <h1 className="text-center text-3xl font-bold my-8 dark:text-white">
+        We have {category.data.length} books related to:
+        <span className="capitalize ml-1">{params.id}</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {category?.data?.map((cat) => (
@@ -65,7 +65,9 @@ const BookDetails = () => {
                 </p>
                 <div className="card-actions justify-end">
                   <Link to={`/book/${cat._id}`}>
-                    <button className="btn btn-primary">Check Details</button>
+                    <button className="btn btn-primary dark:text-white">
+                      Check Details
+                    </button>
                   </Link>
                 </div>
               </div>

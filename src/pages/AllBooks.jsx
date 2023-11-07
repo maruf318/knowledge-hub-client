@@ -45,14 +45,17 @@ const AllBooks = () => {
   };
   return (
     <div className="max-w-7xl mx-auto space-y-5 my-4 md:my-10">
-      <h1 className="text-center text-6xl">
+      <h1 className="text-center text-6xl dark:text-white">
         Total Number of Books: {filteredBooks.length}
       </h1>
       <div className="flex justify-center">
-        <button onClick={toggleShowAvailableBooks} className="btn btn-primary">
+        <button
+          onClick={toggleShowAvailableBooks}
+          className="btn btn-primary dark:text-white "
+        >
           {showAvailableBooks
             ? "Show All books"
-            : "Filter Only Available books"}
+            : "Filter: Show Available books"}
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -83,7 +86,9 @@ const AllBooks = () => {
                 <div className="card-actions justify-end">
                   {/* <button className="btn btn-primary">Update</button> */}
                   <Link to={`/updateBook/${book._id}`}>
-                    <button className="btn">Update Book</button>
+                    <button className="btn btn-primary dark:text-white">
+                      Update Book
+                    </button>
                   </Link>
                 </div>
               </div>

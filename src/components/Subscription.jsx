@@ -1,13 +1,13 @@
 const Subscription = () => {
   return (
     <div className="max-w-7xl mx-auto">
-      <section className="py-20 relative z-50">
+      <section className="py-20 relative z-50 p-2">
         <div className="container">
           <div className="mx-auto max-w-2xl sm:text-center">
-            <span className="font-medium text-gray-400 tracking-widest">
+            <span className="font-medium flex justify-center dark:text-white tracking-widest">
               our price
             </span>
-            <h2 className="md:text-5xl text-3xl font-medium tracking-tight mt-7">
+            <h2 className="md:text-5xl text-center text-3xl font-medium tracking-tight mt-7 dark:text-white">
               Price Plans
             </h2>
             <div className="w-10 mx-auto mt-5 bg-gradient-to-r from-cyan-500 to-blue-500 h-[2px]"></div>
@@ -93,7 +93,7 @@ const Subscription = () => {
                 <div className="border rounded-xl border-gray-300 bg-white dark:border-gray-700 dark:bg-neutral-900">
                   <div className="text-center">
                     <div className="flex flex-col">
-                      <div className="text-center pt-10">
+                      <div className="text-center pt-10 dark:text-white">
                         <h5 className="text-xl font-semibold">Professional</h5>
                         <h2 className="text-5xl mt-8 mb-3 items-center align-middle">
                           <sup className="text-2xl align-middle">$</sup>15
@@ -160,7 +160,7 @@ const Subscription = () => {
               </div>
             </div>
 
-            <div className="flex flex-col border border-gray-300 rounded-xl overflow-hidden dark:border-gray-700">
+            <div className="flex flex-col border border-gray-300  bg-white rounded-xl overflow-hidden dark:border-gray-700">
               <div className="text-center pt-10">
                 <h5 className="text-xl font-semibold">Ultimate</h5>
                 <h2 className="text-5xl mt-8 mb-3 items-center align-middle">
@@ -223,7 +223,7 @@ const Subscription = () => {
               </div>
             </div>
           </div>
-          <h5 className="text-center font-medium mt-14">
+          <h5 className="text-center font-medium mt-14 dark:text-white">
             lnterested in a custom plan?{" "}
             <a href="#" className="text-secondary">
               Get in touch

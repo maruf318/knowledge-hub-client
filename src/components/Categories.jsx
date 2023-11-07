@@ -39,8 +39,8 @@ const Categories = () => {
   // console.log(categories);
   return (
     <div className="max-w-7xl mx-auto min-h-screen my-10">
-      <h1 className="text-5xl text-center font-bold my-10">
-        8 Book categories here
+      <h1 className="text-5xl text-center font-bold my-10 text-black dark:text-white">
+        Top Selection of Categories
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {categories?.data.map((category, index) => (
@@ -59,7 +59,7 @@ const Categories = () => {
 
               <div className="card-actions flex justify-end">
                 <Link to={`/category/${category.category_name}`}>
-                  <button className="btn btn-secondary capitalize text-primary-content ">
+                  <button className="btn btn-secondary capitalize text-primary-content dark:text-white">
                     Explore <FiArrowRight></FiArrowRight>
                   </button>
                 </Link>

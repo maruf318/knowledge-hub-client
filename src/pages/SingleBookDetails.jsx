@@ -110,7 +110,7 @@ const SingleBookDetails = () => {
         // const available = getUser();
         // console.log(available);
         refetch();
-        navigate(-1);
+        navigate("/borrowedbooks");
         notifySuccess();
 
         // const findData = available.data.find((data) => {
@@ -137,11 +137,13 @@ const SingleBookDetails = () => {
           <h2 className="text-5xl text-center text-secondary font-extrabold">
             {book.data.name}
           </h2>
-          <h2 className="text-3xl text-center font-bold">
+          <h2 className="text-3xl text-center font-bold dark:text-white">
             Category: <span className="capitalize">{book.data.category}</span>
           </h2>
-          <h2 className="text-2xl text-center">Author: {book.data.author}</h2>
-          <h2 className="text-2xl text-center">
+          <h2 className="text-2xl text-center dark:text-white">
+            Author: {book.data.author}
+          </h2>
+          <h2 className="text-2xl text-center dark:text-white">
             Available Copies: {book.data.quantity}
           </h2>
 
