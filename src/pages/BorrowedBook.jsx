@@ -31,8 +31,12 @@ const BorrowedBook = () => {
     //     console.log(data);
     //     setData(data);
     //   });
-    axios.get("/allbooks").then((res) => setData(res.data));
-  }, [axios]);
+    if (user) {
+      axios
+        .get("/allbooks", { withCredentials: true })
+        .then((res) => setData(res.data));
+    }
+  }, [axios, user]);
   // const loadedData = useLoaderData();
   // console.log(loadedData);
 
@@ -41,7 +45,9 @@ const BorrowedBook = () => {
   // const [showAvailableBooks, setShowAvailableBooks] = useState(false);
 
   const getCarts = async () => {
-    const res = await axios.get(`/cart?email=${user.email}`);
+    const res = await axios.get(`/cart?email=${user.email}`, {
+      withCredentials: true,
+    });
     return res;
   };
   const {
@@ -77,7 +83,7 @@ const BorrowedBook = () => {
     //       notifySuccess();
     //     }
     //   });
-    axios.delete(`/cart/${_id}`).then((res) => {
+    axios.delete(`/cart/${_id}`, { withCredentials: true }).then((res) => {
       console.log(res.data);
 
       if (res.data.deletedCount > 0) {
@@ -93,20 +99,28 @@ const BorrowedBook = () => {
     const quantity = { quantity: parseInt(data?.quantity) + 1 };
     // console.log(quantity);
     // console.log(name);
-    fetch(
-      `http://localhost:5000/cart/${name}`,
-      {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(quantity),
-      },
-      { credentials: "include" }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    // fetch(
+    //   `http://localhost:5000/cart/${name}`,
+    //   {
+    //     method: "PATCH",
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //     body: JSON.stringify(quantity),
+    //   },
+    //   { credentials: "include" }
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     refetch();
+    //   });
+    axios
+      .patch(`http://localhost:5000/cart/${name}`, quantity, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
         refetch();
       });
   };

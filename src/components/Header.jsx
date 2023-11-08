@@ -9,6 +9,7 @@ import { MdOutlineLightMode, MdOutlineNightlight } from "react-icons/md";
 const Header = () => {
   const { changeTheme, mode } = useTheme();
   const { user, logOut } = useContext(AuthContext);
+
   const navLinks = (
     <>
       <li>

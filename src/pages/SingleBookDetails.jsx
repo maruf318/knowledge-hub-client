@@ -109,13 +109,17 @@ const SingleBookDetails = () => {
     // console.log(parseInt(book.data.quantity) - 1);
     const quantity = { quantity: parseInt(book.data.quantity) - 1 };
     // console.log(quantity);
-    fetch(`http://localhost:5000/borrow/${book.data._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
+    fetch(
+      `http://localhost:5000/borrow/${book.data._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(quantity),
       },
-      body: JSON.stringify(quantity),
-    })
+      { credentials: "include" }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

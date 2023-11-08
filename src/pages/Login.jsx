@@ -11,6 +11,9 @@ const Login = () => {
   const { logIn, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate(null);
   const location = useLocation();
+  // function timeout(delay: number) {
+  //   return new Promise((res) => setTimeout(res, delay));
+  // }
   // console.log(location);
   const notifySuccess = () =>
     toast.success("Logged in Successful", {
@@ -42,7 +45,12 @@ const Login = () => {
     logIn(email, password)
       .then(() => {
         notifySuccess();
-        navigate(location?.state ? location.state : "/");
+        //delay 1second here
+        setTimeout(() => {
+          // Delay for 1 second
+          navigate(location?.state ? location.state : "/");
+        }, 1000); // 1000 milliseconds = 1 second
+        // navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         console.error(error);
@@ -59,8 +67,12 @@ const Login = () => {
         //   "success"
         // );
         notifySuccess();
+        setTimeout(() => {
+          // Delay for 1 second
+          navigate(location?.state ? location.state : "/");
+        }, 1000); // 1000 milliseconds = 1 second
 
-        navigate(location?.state ? location.state : "/");
+        // navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         // setErrorText(error.message);

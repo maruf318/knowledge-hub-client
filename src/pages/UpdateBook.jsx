@@ -2,6 +2,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 // import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
+import axios from "axios";
 const UpdateBook = () => {
   // const axios = useAxios();
   const bookdata = useLoaderData();
@@ -38,20 +39,28 @@ const UpdateBook = () => {
       author,
     };
     // console.log(newbook);
-    fetch(`http://localhost:5000/book/${bookdata._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateBook),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          // alert("Updated successfully");
-          notifySuccess();
-        }
+    // fetch(`http://localhost:5000/book/${bookdata._id}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(updateBook),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.modifiedCount > 0) {
+    //       // alert("Updated successfully");
+    //       notifySuccess();
+    //     }
+    //   });
+    axios
+      .put(`http://localhost:5000/book/${bookdata._id}`, updateBook, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+        notifySuccess();
       });
   };
   return (

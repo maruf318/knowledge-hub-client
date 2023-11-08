@@ -40,9 +40,9 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
-      setUser(currentUser);
-      console.log("user in auth state", currentUser);
 
+      console.log("user in auth state", currentUser);
+      setUser(currentUser);
       setLoading(false);
       //if user exists then issue a token
       if (currentUser) {

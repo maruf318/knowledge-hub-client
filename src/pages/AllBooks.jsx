@@ -10,7 +10,7 @@ const AllBooks = () => {
   const [showAvailableBooks, setShowAvailableBooks] = useState(false);
 
   const getBooks = async () => {
-    const res = await axios.get("/allbooks");
+    const res = await axios.get("/allbooks", { withCredentials: true });
     return res;
   };
   const {
@@ -19,7 +19,7 @@ const AllBooks = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["book"],
+    queryKey: ["books"],
     queryFn: getBooks,
   });
   // console.log(books?.data);
@@ -66,7 +66,7 @@ const AllBooks = () => {
             <div className="card card-compact  bg-base-100 shadow-xl h-[500px]">
               <figure>
                 <img
-                  className="w-full h-[300px]"
+                  className="w-full h-[300px] object-cover"
                   src={book?.image}
                   alt="Shoes"
                 />

@@ -8,7 +8,7 @@ const BookDetails = () => {
   const params = useParams();
   // console.log(params.id);
   const getCategory = async () => {
-    const res = await axios.get(`/category/${params.id}`);
+    const res = await axios.get(`/category/${params.id}`,{withCredentials:true});
     return res;
   };
   const {
