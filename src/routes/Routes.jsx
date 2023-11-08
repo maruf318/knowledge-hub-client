@@ -31,7 +31,7 @@ const router = createBrowserRouter([
             <BorrowedBook></BorrowedBook>
           </PrivateRoute>
         ),
-        // loader: () => fetch("https://knowledge-hub-c55c9.web.app/allbooks"),
+        // loader: () => fetch("https://knowledge-hub-server-delta.vercel.app/allbooks"),
       },
       {
         path: "allbooks",
@@ -81,7 +81,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://knowledge-hub-c55c9.web.app/book/${params.id}`),
+          fetch(
+            `https://knowledge-hub-server-delta.vercel.app/book/${params.id}`
+          ),
       },
     ],
   },

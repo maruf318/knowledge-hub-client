@@ -13,9 +13,12 @@ const SingleBookDetails = () => {
   const current = new Date();
   const [loadedData, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://knowledge-hub-c55c9.web.app/cart?email=${user?.email}`, {
-      credentials: "include",
-    })
+    fetch(
+      `https://knowledge-hub-server-delta.vercel.app/cart?email=${user?.email}`,
+      {
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -95,7 +98,7 @@ const SingleBookDetails = () => {
     console.log(user.displayName, returnDate);
     const sendingData = {
       email: user.email,
-      // userName:user.displayName,
+      userName: user.displayName,
       image: book.data.image,
       name: book.data.name,
       category: book.data.category,
@@ -111,7 +114,7 @@ const SingleBookDetails = () => {
     const quantity = { quantity: parseInt(book.data.quantity) - 1 };
     // console.log(quantity);
     fetch(
-      `https://knowledge-hub-c55c9.web.app/borrow/${book.data._id}`,
+      `https://knowledge-hub-server-delta.vercel.app/borrow/${book.data._id}`,
       {
         method: "PATCH",
         headers: {
@@ -203,8 +206,8 @@ const SingleBookDetails = () => {
                           id=""
                           required
                           // value={getDate()}
-                          // readOnly
                         />
+
                         {/* <input type="text" name="name" id="" /> */}
                         <input
                           className="btn bg-primary "

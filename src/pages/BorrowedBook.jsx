@@ -23,7 +23,7 @@ const BorrowedBook = () => {
       theme: "colored",
     });
   useEffect(() => {
-    // fetch("https://knowledge-hub-c55c9.web.app/allbooks", {
+    // fetch("https://knowledge-hub-server-delta.vercel.app/allbooks", {
     //   credentials: "include",
     // })
     //   .then((res) => res.json())
@@ -40,7 +40,7 @@ const BorrowedBook = () => {
   // const loadedData = useLoaderData();
   // console.log(loadedData);
 
-  //https://knowledge-hub-c55c9.web.app/cart?email=library@gmail.com
+  //https://knowledge-hub-server-delta.vercel.app/cart?email=library@gmail.com
 
   // const [showAvailableBooks, setShowAvailableBooks] = useState(false);
 
@@ -72,7 +72,7 @@ const BorrowedBook = () => {
   // console.log(cart.data);
   const handleDelete = (_id, name) => {
     // console.log(_id);
-    // fetch(`https://knowledge-hub-c55c9.web.app/cart/${_id}`, {
+    // fetch(`https://knowledge-hub-server-delta.vercel.app/cart/${_id}`, {
     //   method: "DELETE",
     // })
     //   .then((res) => res.json())
@@ -100,7 +100,7 @@ const BorrowedBook = () => {
     // console.log(quantity);
     // console.log(name);
     // fetch(
-    //   `https://knowledge-hub-c55c9.web.app/cart/${name}`,
+    //   `https://knowledge-hub-server-delta.vercel.app/cart/${name}`,
     //   {
     //     method: "PATCH",
     //     headers: {
@@ -116,9 +116,13 @@ const BorrowedBook = () => {
     //     refetch();
     //   });
     axios
-      .patch(`https://knowledge-hub-c55c9.web.app/cart/${name}`, quantity, {
-        withCredentials: true,
-      })
+      .patch(
+        `https://knowledge-hub-server-delta.vercel.app/cart/${name}`,
+        quantity,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log(res.data);
         refetch();

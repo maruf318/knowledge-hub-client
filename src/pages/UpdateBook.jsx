@@ -39,7 +39,7 @@ const UpdateBook = () => {
       author,
     };
     // console.log(newbook);
-    // fetch(`https://knowledge-hub-c55c9.web.app/book/${bookdata._id}`, {
+    // fetch(`https://knowledge-hub-server-delta.vercel.app/book/${bookdata._id}`, {
     //   method: "PUT",
     //   headers: {
     //     "content-type": "application/json",
@@ -56,7 +56,7 @@ const UpdateBook = () => {
     //   });
     axios
       .put(
-        `https://knowledge-hub-c55c9.web.app/book/${bookdata._id}`,
+        `https://knowledge-hub-server-delta.vercel.app/book/${bookdata._id}`,
         updateBook,
         {
           withCredentials: true,
