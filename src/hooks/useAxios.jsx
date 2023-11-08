@@ -4,7 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const instance = axios.create({
-  baseURL: "https://knowledge-hub-server-delta.vercel.app",
+  baseURL: "https://knowledge-hub-c55c9.web.app",
   withCredentials: true,
 });
 

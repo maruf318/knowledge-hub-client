@@ -47,26 +47,18 @@ const AuthProvider = ({ children }) => {
       //if user exists then issue a token
       if (currentUser) {
         axios
-          .post(
-            "https://knowledge-hub-server-delta.vercel.app/jwt",
-            loggedUser,
-            {
-              withCredentials: true,
-            }
-          )
+          .post("https://knowledge-hub-c55c9.web.app/jwt", loggedUser, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log("token response", res.data);
           })
           .catch((error) => console.log(error));
       } else {
         axios
-          .post(
-            "https://knowledge-hub-server-delta.vercel.app/logout",
-            loggedUser,
-            {
-              withCredentials: true,
-            }
-          )
+          .post("https://knowledge-hub-c55c9.web.app/logout", loggedUser, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res.data);
           });

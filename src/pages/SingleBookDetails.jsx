@@ -13,12 +13,9 @@ const SingleBookDetails = () => {
   const current = new Date();
   const [loadedData, setData] = useState([]);
   useEffect(() => {
-    fetch(
-      `https://knowledge-hub-server-delta.vercel.app/cart?email=${user?.email}`,
-      {
-        credentials: "include",
-      }
-    )
+    fetch(`https://knowledge-hub-c55c9.web.app/cart?email=${user?.email}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -28,17 +25,17 @@ const SingleBookDetails = () => {
   // const loadedData = useLoaderData();
 
   const [modalOpen, setModalOpen] = useState(true);
-  const getDate = () => {
-    const today = new Date();
-    const nextWeek = new Date(today);
-    nextWeek.setDate(today.getDate() + 7);
+  // const getDate = () => {
+  //   const today = new Date();
+  //   const nextWeek = new Date(today);
+  //   nextWeek.setDate(today.getDate() + 7);
 
-    const yyyy = nextWeek.getFullYear();
-    const mm = String(nextWeek.getMonth() + 1).padStart(2, "0");
-    const dd = String(nextWeek.getDate()).padStart(2, "0");
+  //   const yyyy = nextWeek.getFullYear();
+  //   const mm = String(nextWeek.getMonth() + 1).padStart(2, "0");
+  //   const dd = String(nextWeek.getDate()).padStart(2, "0");
 
-    return `${yyyy}-${mm}-${dd}`;
-  };
+  //   return `${yyyy}-${mm}-${dd}`;
+  // };
   const notifySuccess = () =>
     toast.success("Added to your Borrowed Books", {
       position: "top-center",
@@ -95,9 +92,10 @@ const SingleBookDetails = () => {
     // console.log(e.target.date.value, e.target.name.value);
     const returnDate = e.target.date.value;
     setModalOpen(false);
+    console.log(user.displayName, returnDate);
     const sendingData = {
       email: user.email,
-
+      // userName:user.displayName,
       image: book.data.image,
       name: book.data.name,
       category: book.data.category,
@@ -113,7 +111,7 @@ const SingleBookDetails = () => {
     const quantity = { quantity: parseInt(book.data.quantity) - 1 };
     // console.log(quantity);
     fetch(
-      `https://knowledge-hub-server-delta.vercel.app/borrow/${book.data._id}`,
+      `https://knowledge-hub-c55c9.web.app/borrow/${book.data._id}`,
       {
         method: "PATCH",
         headers: {
@@ -186,7 +184,7 @@ const SingleBookDetails = () => {
                 >
                   <div className="modal-box">
                     <h3 className="font-bold text-lg text-center mb-4">
-                      We can only offer you 7 days for return
+                      We hope you Enjoy reading the book
                     </h3>
 
                     <p className="py-4 text-center">
@@ -204,8 +202,8 @@ const SingleBookDetails = () => {
                           name="date"
                           id=""
                           required
-                          value={getDate()}
-                          readOnly
+                          // value={getDate()}
+                          // readOnly
                         />
                         {/* <input type="text" name="name" id="" /> */}
                         <input
