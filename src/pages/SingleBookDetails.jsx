@@ -13,9 +13,12 @@ const SingleBookDetails = () => {
   const current = new Date();
   const [loadedData, setData] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/cart?email=${user?.email}`, {
-      credentials: "include",
-    })
+    fetch(
+      `https://knowledge-hub-server-delta.vercel.app/cart?email=${user?.email}`,
+      {
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -110,7 +113,7 @@ const SingleBookDetails = () => {
     const quantity = { quantity: parseInt(book.data.quantity) - 1 };
     // console.log(quantity);
     fetch(
-      `http://localhost:5000/borrow/${book.data._id}`,
+      `https://knowledge-hub-server-delta.vercel.app/borrow/${book.data._id}`,
       {
         method: "PATCH",
         headers: {
