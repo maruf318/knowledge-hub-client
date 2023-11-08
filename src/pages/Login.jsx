@@ -49,7 +49,7 @@ const Login = () => {
         setTimeout(() => {
           // Delay for 1 second
           navigate(location?.state ? location.state : "/");
-        }, 1000); // 1000 milliseconds = 1 second
+        }, 2000); // 1000 milliseconds = 1 second
         // navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
@@ -70,7 +70,7 @@ const Login = () => {
         setTimeout(() => {
           // Delay for 1 second
           navigate(location?.state ? location.state : "/");
-        }, 1000); // 1000 milliseconds = 1 second
+        }, 2000); // 1000 milliseconds = 1 second
 
         // navigate(location?.state ? location.state : "/");
       })
