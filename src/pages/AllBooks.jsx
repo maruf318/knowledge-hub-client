@@ -63,10 +63,10 @@ const AllBooks = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredBooks?.map((book) => (
           <div key={book?._id}>
-            <div className="card card-compact  bg-base-100 shadow-xl h-[500px]">
+            <div className="card group card-compact  bg-base-100 shadow-xl h-[500px]">
               <figure>
                 <img
-                  className="w-full h-[300px] object-cover"
+                  className="w-full group-hover:scale-110 h-[300px] object-cover"
                   src={book?.image}
                   alt="Shoes"
                 />

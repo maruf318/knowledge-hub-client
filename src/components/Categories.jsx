@@ -44,10 +44,13 @@ const Categories = () => {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {categories?.data.map((category, index) => (
-          <div key={index} className="card card-compact bg-base-100 shadow-xl">
+          <div
+            key={index}
+            className="card group card-compact bg-base-100 shadow-xl"
+          >
             <figure>
               <img
-                className="h-[250px] w-full "
+                className="h-[250px] group-hover:scale-110 w-full "
                 src={category.image}
                 alt="Shoes"
               />
